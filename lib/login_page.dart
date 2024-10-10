@@ -19,7 +19,10 @@ class _LoginPageState extends State<LoginPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: Text(
+          'Login',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.blue,
       ),
       body: Padding(
@@ -81,12 +84,23 @@ class _LoginPageState extends State<LoginPage> {
                   if (formKey.currentState!.validate()) {
                     if (emailController.text == staticEmail &&
                         passwordController.text == staticPassword) {
-                      Navigator.pushNamed(context, '/home');
+                      Navigator.pushNamed(context, '/home', arguments: {
+                        'email': emailController.text,
+                        'password': passwordController.text
+                      });
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text(
+                        'Email atau password salah',
+                        textAlign: TextAlign.center,
+                      )));
                     }
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text(
-                            'Email dan password harus di isi dengan benar')));
+                      'Email dan password harus di isi dengan benar',
+                      textAlign: TextAlign.center,
+                    )));
                   }
                 },
                 child: const Text('Login'),
