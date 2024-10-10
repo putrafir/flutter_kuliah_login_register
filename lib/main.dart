@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kuliah_navigator2/home_page.dart';
 import 'package:kuliah_navigator2/login_page.dart';
 import 'package:kuliah_navigator2/register_page.dart';
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginPage(),
         '/register': (context) => RegisterPage(),
+        '/home': (context) => HomePage(),
       },
     );
   }
