@@ -89,7 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                         'password': passwordController.text
                       });
                     } else {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text(
                         'Email atau password salah',
                         textAlign: TextAlign.center,
