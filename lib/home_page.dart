@@ -57,11 +57,17 @@ class DinamisData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text(
+          'Home',
+          style: TextStyle(color: Colors.white),
+        ),
         backgroundColor: Colors.blue,
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(
+              Icons.logout,
+              color: Colors.white,
+            ),
             onPressed: () {
               Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
             },
@@ -74,8 +80,8 @@ class DinamisData extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
-                'Selamat Datang di Halaman Home!',
+              Text(
+                'Selamat Datang $userNamaLengkap di Halaman Home!',
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 20),
