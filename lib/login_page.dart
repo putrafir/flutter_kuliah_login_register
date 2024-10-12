@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -7,16 +8,22 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-final formKey = GlobalKey<FormState>();
-final TextEditingController emailController = TextEditingController();
-final TextEditingController passwordController = TextEditingController();
-
 final String staticEmail = 'firdaus@gmail.com';
 final String staticPassword = 'haduh123';
 
-final String message = '';
-
 class _LoginPageState extends State<LoginPage> {
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
+  Future<bool> authenticateUser(String email, String password) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? savedEmail = prefs.getString('userEmail');
+    String? savedPassword = prefs.getString('userPassword');
+
+    return email == savedEmail && password == savedPassword;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,27 +89,28 @@ class _LoginPageState extends State<LoginPage> {
                 height: 20,
               ),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (formKey.currentState!.validate()) {
-                    if (emailController.text == staticEmail &&
-                        passwordController.text == staticPassword) {
-                      Navigator.pushNamed(context, '/home', arguments: {
-                        'email': emailController.text,
-                        'password': passwordController.text
-                      });
-                    } else {
+                    bool isAuthenticated = await authenticateUser(
+                        emailController.text, passwordController.text);
+                    if (isAuthenticated) {
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/home', (route) => false);
+                    }
+                    // static
+                    // if (emailController.text == staticEmail &&
+                    //     passwordController.text == staticPassword) {
+                    //   Navigator.pushNamed(context, '/home', arguments: {
+                    //     'email': emailController.text,
+                    //     'password': passwordController.text
+                    //   });}
+                    else {
                       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                           content: Text(
                         'Email atau password salah',
                         textAlign: TextAlign.center,
                       )));
                     }
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text(
-                      'Email dan password harus di isi dengan benar',
-                      textAlign: TextAlign.center,
-                    )));
                   }
                 },
                 child: const Text('Login'),

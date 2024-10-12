@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-final formKey = GlobalKey<FormState>();
-final namaLengkapController = TextEditingController();
-final emailController = TextEditingController();
-final passwordController = TextEditingController();
-final confirmPasswordController = TextEditingController();
-
 class _RegisterPageState extends State<RegisterPage> {
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController namaLengkapController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
+
+  Future<void> saveUserData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userEmail', emailController.text);
+    await prefs.setString('userPassword', passwordController.text);
+  }
+
+  Future<void> printAllSharedPreferencesData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    Set<String> keys = prefs.getKeys();
+
+    for (String key in keys) {
+      var value = prefs.get(key);
+      print('Key: $key, Value: $value');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,6 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 size: 100,
               ),
               TextFormField(
+                controller: namaLengkapController,
                 decoration: InputDecoration(
                   labelText: 'Nama Lengkap',
                   border: OutlineInputBorder(),
@@ -48,6 +67,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               SizedBox(height: 20),
               TextFormField(
+                controller: emailController,
                 decoration: InputDecoration(
                   labelText: 'Email',
                   border: OutlineInputBorder(),
@@ -64,6 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               SizedBox(height: 20),
               TextFormField(
+                controller: passwordController,
                 decoration: InputDecoration(
                   labelText: 'Password',
                   border: OutlineInputBorder(),
@@ -81,6 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               SizedBox(height: 20),
               TextFormField(
+                controller: confirmPasswordController,
                 decoration: InputDecoration(
                   labelText: 'Konfirmasi Password',
                   border: OutlineInputBorder(),
@@ -98,8 +120,10 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   if (formKey.currentState!.validate()) {
+                    await saveUserData();
+                    printAllSharedPreferencesData();
                     Navigator.pushNamed(context, '/');
                   }
                 },
