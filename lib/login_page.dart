@@ -7,16 +7,18 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
+final formKey = GlobalKey<FormState>();
+final TextEditingController emailController = TextEditingController();
+final TextEditingController passwordController = TextEditingController();
+
+final String staticEmail = 'firdaus@gmail.com';
+final String staticPassword = 'haduh123';
+
+final String message = '';
+
 class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-
-    final String staticEmail = 'firdaus@gmail.com';
-    final String staticPassword = 'haduh123';
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
