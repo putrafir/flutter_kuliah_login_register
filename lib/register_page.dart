@@ -16,6 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future<void> saveUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('userNamaLengkap', namaLengkapController.text);
     await prefs.setString('userEmail', emailController.text);
     await prefs.setString('userPassword', passwordController.text);
   }

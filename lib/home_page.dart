@@ -8,7 +8,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String? userEmail;
+  String? userNamaLengkap;
   bool isLoading = true;
+
   @override
   void initState() {
     super.initState();
@@ -18,6 +20,8 @@ class _HomePageState extends State<HomePage> {
   Future<void> loadUserData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
+      userNamaLengkap =
+          prefs.getString('userNamaLengkap') ?? 'Pengguna tidak dikenal';
       userEmail = prefs.getString('userEmail') ?? 'Pengguna tidak dikenal';
       isLoading = false;
     });
@@ -29,7 +33,7 @@ class _HomePageState extends State<HomePage> {
     //     ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
     if (isLoading) {
-      return Scaffold(
+      return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
         ),
@@ -37,14 +41,17 @@ class _HomePageState extends State<HomePage> {
     }
     return DinamisData(
       userEmail: userEmail,
+      userNamaLengkap: userNamaLengkap,
     );
   }
 }
 
 class DinamisData extends StatelessWidget {
   final String? userEmail;
+  final String? userNamaLengkap;
 
-  const DinamisData({Key? key, this.userEmail}) : super(key: key);
+  const DinamisData({Key? key, this.userEmail, this.userNamaLengkap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +90,7 @@ class DinamisData extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               Text(
-                'Email: $userEmail',
+                'Nama lengkap: $userNamaLengkap\nEmail: $userEmail',
                 style: const TextStyle(fontSize: 18, color: Colors.black87),
               ),
               const SizedBox(height: 40),
