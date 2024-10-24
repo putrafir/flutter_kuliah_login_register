@@ -1,16 +1,10 @@
-# kuliah_navigator2
+Register Page
+![Register Page](<Simulator Screenshot - iPhone 16 Pro - 2024-10-24 at 23.02.33.png>)
+![validation](<Simulator Screenshot - iPhone 16 Pro - 2024-10-24 at 23.05.15.png>)
 
-A new Flutter project.
+Login Page
+![Login Page](<Simulator Screenshot - iPhone 16 Pro - 2024-10-24 at 23.06.13.png>)
+![validation](<Simulator Screenshot - iPhone 16 Pro - 2024-10-24 at 23.07.20.png>)
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Home Page
+![Home Page](<Simulator Screenshot - iPhone 16 Pro - 2024-10-24 at 23.09.39.png>)

@@ -86,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 40),
                 const Text(
-                  'Nikmati tampilan yang menarik dan interaktif!',
+                  'Gunakan aplikasi ini sebaik mungkin',
                   style: TextStyle(fontSize: 16, color: Colors.grey),
                   textAlign: TextAlign.center,
                 ),
