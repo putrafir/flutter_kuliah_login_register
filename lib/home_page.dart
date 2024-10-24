@@ -39,22 +39,6 @@ class _HomePageState extends State<HomePage> {
         ),
       );
     }
-    return DinamisData(
-      userEmail: userEmail,
-      userNamaLengkap: userNamaLengkap,
-    );
-  }
-}
-
-class DinamisData extends StatelessWidget {
-  final String? userEmail;
-  final String? userNamaLengkap;
-
-  const DinamisData({Key? key, this.userEmail, this.userNamaLengkap})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -74,84 +58,86 @@ class DinamisData extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Selamat Datang $userNamaLengkap di Halaman Home!',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 20),
-              CircleAvatar(
-                radius: 50,
-                backgroundColor: Colors.blue.shade100,
-                child: const Icon(
-                  Icons.person,
-                  size: 60,
-                  color: Colors.blue,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Selamat Datang $userNamaLengkap di Halaman Home!',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
-              ),
-              const SizedBox(height: 20),
-              Text(
-                'Nama lengkap: $userNamaLengkap\nEmail: $userEmail',
-                style: const TextStyle(fontSize: 18, color: Colors.black87),
-              ),
-              const SizedBox(height: 40),
-              const Text(
-                'Nikmati tampilan yang menarik dan interaktif!',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 20),
-              // Elemen dekoratif sebagai penghias
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.blue.shade200,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: const Icon(
-                      Icons.star,
-                      color: Colors.white,
-                      size: 30,
-                    ),
+                const SizedBox(height: 20),
+                CircleAvatar(
+                  radius: 50,
+                  backgroundColor: Colors.blue.shade100,
+                  child: const Icon(
+                    Icons.person,
+                    size: 60,
+                    color: Colors.blue,
                   ),
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.green.shade200,
-                      borderRadius: BorderRadius.circular(30),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'Nama lengkap: $userNamaLengkap\nEmail: $userEmail',
+                  style: const TextStyle(fontSize: 18, color: Colors.black87),
+                ),
+                const SizedBox(height: 40),
+                const Text(
+                  'Nikmati tampilan yang menarik dan interaktif!',
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                // Elemen dekoratif sebagai penghias
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.blue.shade200,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: const Icon(
+                        Icons.star,
+                        color: Colors.white,
+                        size: 30,
+                      ),
                     ),
-                    child: const Icon(
-                      Icons.favorite,
-                      color: Colors.white,
-                      size: 30,
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.green.shade200,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: const Icon(
+                        Icons.favorite,
+                        color: Colors.white,
+                        size: 30,
+                      ),
                     ),
-                  ),
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                      color: Colors.orange.shade200,
-                      borderRadius: BorderRadius.circular(30),
+                    Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                        color: Colors.orange.shade200,
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      child: const Icon(
+                        Icons.emoji_emotions,
+                        color: Colors.white,
+                        size: 30,
+                      ),
                     ),
-                    child: const Icon(
-                      Icons.emoji_emotions,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

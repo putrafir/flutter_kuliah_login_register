@@ -8,8 +8,8 @@ class LoginPage extends StatefulWidget {
   State<LoginPage> createState() => _LoginPageState();
 }
 
-final String staticEmail = 'firdaus@gmail.com';
-final String staticPassword = 'haduh123';
+// final String staticEmail = 'firdaus@gmail.com';
+// final String staticPassword = 'haduh123';
 
 class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
@@ -34,92 +34,101 @@ class _LoginPageState extends State<LoginPage> {
         ),
         backgroundColor: Colors.blue,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.person,
-                color: Colors.blue,
-                size: 100,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  border: OutlineInputBorder(),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: BoxConstraints(maxWidth: 400),
+              child: Form(
+                key: formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.person,
+                      color: Colors.blue,
+                      size: 100,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: emailController,
+                      decoration: const InputDecoration(
+                        labelText: 'Email',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Email tidak boleh kosong';
+                        }
+                        if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                          return 'Masukkan email yang valid';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextFormField(
+                      controller: passwordController,
+                      decoration: const InputDecoration(
+                        labelText: 'Password',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Password tidak boleh kosong';
+                        }
+                        if (value.length < 6) {
+                          return 'Password harus memiliki minimal 6 karakter';
+                        }
+                        return null;
+                      },
+                      obscureText: true,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (formKey.currentState!.validate()) {
+                          bool isAuthenticated = await authenticateUser(
+                              emailController.text, passwordController.text);
+                          if (isAuthenticated) {
+                            Navigator.pushNamedAndRemoveUntil(
+                                context, '/home', (route) => false);
+                          }
+                          // static
+                          // if (emailController.text == staticEmail &&
+                          //     passwordController.text == staticPassword) {
+                          //   Navigator.pushNamed(context, '/home', arguments: {
+                          //     'email': emailController.text,
+                          //     'password': passwordController.text
+                          //   });}
+                          else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                                    content: Text(
+                              'Email atau password salah',
+                              textAlign: TextAlign.center,
+                            )));
+                          }
+                        }
+                      },
+                      child: const Text('Login'),
+                    ),
+                    TextButton(
+                      onPressed: () =>
+                          Navigator.pushNamed(context, '/register'),
+                      child: const Text('Belum punya akun? -> Register'),
+                    ),
+                  ],
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Email tidak boleh kosong';
-                  }
-                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                    return 'Masukkan email yang valid';
-                  }
-                  return null;
-                },
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: passwordController,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                  border: OutlineInputBorder(),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Password tidak boleh kosong';
-                  }
-                  if (value.length < 6) {
-                    return 'Password harus memiliki minimal 6 karakter';
-                  }
-                  return null;
-                },
-                obscureText: true,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  if (formKey.currentState!.validate()) {
-                    bool isAuthenticated = await authenticateUser(
-                        emailController.text, passwordController.text);
-                    if (isAuthenticated) {
-                      Navigator.pushNamedAndRemoveUntil(
-                          context, '/home', (route) => false);
-                    }
-                    // static
-                    // if (emailController.text == staticEmail &&
-                    //     passwordController.text == staticPassword) {
-                    //   Navigator.pushNamed(context, '/home', arguments: {
-                    //     'email': emailController.text,
-                    //     'password': passwordController.text
-                    //   });}
-                    else {
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text(
-                        'Email atau password salah',
-                        textAlign: TextAlign.center,
-                      )));
-                    }
-                  }
-                },
-                child: const Text('Login'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pushNamed(context, '/register'),
-                child: const Text('Belum punya akun? -> Register'),
-              ),
-            ],
+            ),
           ),
         ),
       ),
