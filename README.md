@@ -1,3 +1,7 @@
+NAMA : AHMAD PUTRA FIRDAUS
+NIM : 362358302028
+KELAS : 2B TRPL
+
 Register Page
 ![Register Page](<Simulator Screenshot - iPhone 16 Pro - 2024-10-24 at 23.02.33.png>)
 ![validation](<Simulator Screenshot - iPhone 16 Pro - 2024-10-24 at 23.05.15.png>)
